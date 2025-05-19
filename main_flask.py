@@ -26,7 +26,7 @@ def home():
     return render_template("tests.html")
 
 @app.route("/createList", methods=["POST", "GET"])
-def create_wordlist(random_word=None):
+def create_wordlist():
     global wordListCreated
     
     word_len = request.form.get("word_len")
@@ -73,8 +73,8 @@ def another():
         session["output"][0] = random_word
         session["computer_output"] = random_word
     else:
-        next_word = next_random_word()
-        session["output"][-1] = next_word
+        the_next_word = next_random_word()
+        session["output"][-1] = the_next_word
         session["choices_left"] = len(session["new_list"])
     
     return render_template("tests.html", outputArea=session.get("output"), num_choices=session.get("choices_left"))
@@ -90,8 +90,8 @@ def next_word():
     classify_input()
     filter_list()
     
-    next_word = next_random_word()
-    session["output"].append(next_word)
+    the_next_word = next_random_word()
+    session["output"].append(the_next_word)
     session["choices_left"] = len(session["new_list"])
     
     return render_template('tests.html', outputArea=session.get("output"), num_choices=session["choices_left"])
