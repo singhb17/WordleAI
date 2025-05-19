@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout from Sketch</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const fromScratchRadio = document.getElementById('fromScratch');
+            const fromMiddleRadio = document.getElementById('fromMiddle');
+            const middleInput = document.getElementById('middleNumInputs');
+            const dbLenInput = document.getElementById('DBInput');
+
+            // Function to toggle visibility
+            function toggleMiddleInput() {
+                if (fromMiddleRadio.checked) {
+                    middleInput.style.display = 'block';
+                } else {
+                    middleInput.style.display = 'none';
+                }
+            }
+
+            // Initial hide (in case it's not already hidden)
+            toggleMiddleInput();
+
+            // Add event listeners
+            fromScratchRadio.addEventListener('change', toggleMiddleInput);
+            fromMiddleRadio.addEventListener('change', toggleMiddleInput);
+        });
+    </script>
+
+    <style>
+        /* styles.css */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 80%;
+            margin: 0 auto;
+            align-items: stretch;
+        }
+
+        /* Left Section */
+        .left-section {
+            flex: 2.90; /* Takes up 3 parts of the available space */
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .main-content {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            min-height: 400px; /* Placeholder height */
+        }
+
+        .input-box {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-box label {
+            font-weight: bold;
+        }
+
+        .input-box input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        /* Right Section (Sidebar) */
+        .right-section {
+            flex: 1.10; /* Takes up 1 part of the available space */
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: 100%;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .buttons-container button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #6ca965;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            /* margin-bottom: 10px; */
+            flex:1;
+        }
+
+        .buttons-container button:hover {
+            background-color: #52804d;
+        }
+
+        .right-section fieldset {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .pickDBPanal form {
+            display: flex;
+            gap: 10px; /* Space between input and button */
+            width: 100%; /* Ensure form takes full width of fieldset */
+        }
+
+        .DBInput {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .submitBtn {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 40%; /* Makes it a bit longer */
+            margin: 20px auto 10px auto; /* Top spacing + center horizontally */
+            display: block; /* Required to center using margin auto */
+        }
+
+        .submitBtn:hover {
+            background-color: rgb(71, 71, 71);
+        }
+
+        .pickTypePanel {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .pickTypePanel div {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between radio and label */
+        }
+
+        .rightSectionForms {
+            border: 1px solid black /* !important /*; /* Strong black border */
+        }
+
+        .rightSectionForms fieldset {
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-bottom: 20px;
+        }
+
+        .actions{
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .actions form {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .message-banner {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            min-height: 60px; /* Placeholder height */
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="main-content">
+                <h3>Number of choices left: {{ num_choices }}<br><br></h3>
+                <h4>{{outputArea}}</h4>
+            </div>
+            <div class="message-banner">
+                <h4>{{MESSAGES}}</h4>
+            </div>
+            <!-- Input Box Below -->
+            <div class="input-box">
+                <label for="text-input">Textbox, Input Box:</label>
+                <form method="POST" action="{{ url_for('next_word') }}">
+                    <input type="text" id="text-input" name="textUserInput" placeholder="Enter text here..." required>
+                    <button type="submit" style="display: none;"></button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Section (Sidebar) -->
+        <div class="right-section">
+            <fieldset class="rightSectionForms">
+
+                <form method="POST" action="{{url_for('create_wordlist')}}">
+
+                    <fieldset class="pickDBPanel">
+                        <legend>Pick Database</legend>
+                        <label>
+                            <input id="DBInput" class="DBInput" type="number" name="word_len" value="{{ dbInputVal }}">
+                        </label>
+                    </fieldset>
+
+                    <fieldset class="pickTypePanel">
+                        <legend>Pick Mode</legend>
+                        <div id="radAndLabel">
+                            <label>
+                                <input id="fromScratch" type="radio" name="radModeType" value="fromScratch">
+                            </label>
+                            <label>From Scratch</label>
+                        </div>
+
+                        <div id="radAndLabel">
+                            <label for="fromMiddle"><input id="fromMiddle" type="radio" name="radModeType" value="fromMiddle"></label>
+                            <label>From Middle</label>
+                        </div>
+                            <label><input id="middleNumInputs" type="number" name="middle_input_num" style="display:none;"></label>
+
+                    </fieldset>
+
+                    <input class="submitBtn" type="submit" name="saveDB" value="Save">
+
+                </form>
+
+            </fieldset>
+
+            <div class="buttons-container">
+                <fieldset class="actions">
+                    <legend>Actions</legend>
+
+                        <form method="POST" action="{{url_for('another')}}">
+                            <button id="another" type="submit" name="action" value="another">Another</button>
+                        </form>
+                        <form method="POST" action="{{url_for('home')}}">
+                            <button id="reset" type="submit" name="action" value="reset">Reset</button>
+                        </form>
+                </fieldset>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

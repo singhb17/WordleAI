@@ -1,0 +1,34 @@
+# @app.route("/numLettersLink", methods=["POST", "GET"])
+# def numLettersFunction():
+#     if request.form.get("nameInput") == None:
+#         return render_template("numLetters.html")
+    
+#     name = request.form.get("nameInput").upper()
+#     nameLength = len(name) if " " not in name else len(name.replace(" ", ""))
+    
+#     reversedName = name[::-1]
+#     nameReversed = "".join(reversedName)
+#     return render_template("numLetters.html", savedName=name, nameLength=nameLength, nameReversed=nameReversed)
+
+
+
+
+
+
+
+
+
+
+# <div class="buttons-container">
+#     <fieldset class="actions">
+#         <legend>Actions</legend>
+
+#             <form method="POST" action="{{url_for('home')}}">
+#                 <button id="another" type="submit" name="action" value="another">Another</button>
+#             </form>
+            
+#             <form method="POST" action="{{url_for('home')}}">
+#                 <button id="reset" type="submit" name="action" value="reset">Reset</button>
+#             </form>
+#     </fieldset>
+# </div>
