@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/WordleSolverFlask.iml" filepath="$PROJECT_DIR$/.idea/WordleSolverFlask.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/WordleAI.iml" filepath="$PROJECT_DIR$/.idea/WordleAI.iml" />
     </modules>
   </component>
 </project>
