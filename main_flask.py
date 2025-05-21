@@ -32,7 +32,7 @@ def create_wordlist():
     word_len = request.form.get("word_len")
     selected_mode = request.form.get("radModeType")
     if word_len == "" or not selected_mode:
-        return render_template("tests.html", MESSAGES="Please input a word length", dbInputVal=word_len)
+        return render_template("tests.html", MESSAGES="Please complete the DB form!", dbInputVal=word_len)
     else: pass
     
     session["word_len"] = word_len
