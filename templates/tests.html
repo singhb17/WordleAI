@@ -128,7 +128,7 @@
             border-radius: 5px;
         }
 
-        .pickDBPanal form {
+        .pickDBPanel form {
             display: flex;
             gap: 10px; /* Space between input and button */
             width: 100%; /* Ensure form takes full width of fieldset */
@@ -212,7 +212,13 @@
         <div class="left-section">
             <div class="main-content">
                 <h3>Number of choices left: {{ num_choices }}<br><br></h3>
-                <h4>{{outputArea}}</h4>
+<!--                <h4>{{outputArea}}</h4>-->
+                {% for word in outputArea: %}
+                    {{word}}<br>
+                    {% if outputArea.index(word) % 2 != 0: %}
+                       ----------------------- <br>
+                    {% endif %}
+                {% endfor %}
             </div>
             <div class="message-banner">
                 <h4>{{MESSAGES}}</h4>
@@ -242,14 +248,14 @@
 
                     <fieldset class="pickTypePanel">
                         <legend>Pick Mode</legend>
-                        <div id="radAndLabel">
+                        <div id="radLabelScratch">
                             <label>
                                 <input id="fromScratch" type="radio" name="radModeType" value="fromScratch">
                             </label>
                             <label>From Scratch</label>
                         </div>
 
-                        <div id="radAndLabel">
+                        <div id="radLabelMiddle">
                             <label for="fromMiddle"><input id="fromMiddle" type="radio" name="radModeType" value="fromMiddle"></label>
                             <label>From Middle</label>
                         </div>

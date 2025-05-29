@@ -54,9 +54,14 @@ def create_wordlist():
     
     wordListCreated = True
     
-    random_word = random.choice(session.get("word_list"))
-    session["computer_output"] = random_word
-    session["output"].append(random_word)
+    # if fromStart selected, just generate random word and set to computerOutput
+    if selected_mode == "fromScratch":
+        random_word = random.choice(session.get("word_list"))
+        session["computer_output"] = random_word
+        session["output"].append(random_word)
+    elif selected_mode == "fromMiddle":
+        session["FMWordTargetInt"] = request.form.get("middle_input_num")
+        return render_template("tests.html", MESSAGES=f"From Middle Selected, please enter {session["FMWordTargetInt"]} times", dbInputVal=word_len)
     
     return render_template("tests.html", outputArea=session.get("output"), dbInputVal=word_len)
     
@@ -81,20 +86,52 @@ def another():
 
 @app.route("/nextWord", methods=["POST", "GET"])
 def next_word():
-    user_input = request.form.get("textUserInput")
-    session["output"].append(user_input)
     
-    session["session_user_input"] = user_input
-    session["new_list"] = []
+    if "FMWordTargetInt" in session:
+        from_middle()
+        if "FMWordTargetInt" in session:
+            remaining_words = int(session["FMWordTargetInt"]) - int(session["FMCount"])
+            return render_template('tests.html', MESSAGES = f"PLease enter {remaining_words} more")
+        else:
+            the_next_word = next_random_word()
+            session["output"].append(the_next_word)
+            session["choices_left"] = len(session["new_list"])
+            return render_template('tests.html', outputArea=session.get("output"), num_choices=session["choices_left"])
+    else:
+        user_input = request.form.get("textUserInput")
+        session["output"].append(user_input)
     
-    classify_input()
-    filter_list()
+        session["session_user_input"] = user_input
+        session["new_list"] = []
     
-    the_next_word = next_random_word()
-    session["output"].append(the_next_word)
-    session["choices_left"] = len(session["new_list"])
+        classify_input()
+        filter_list()
     
-    return render_template('tests.html', outputArea=session.get("output"), num_choices=session["choices_left"])
+        the_next_word = next_random_word()
+        session["output"].append(the_next_word)
+        session["choices_left"] = len(session["new_list"])
+    
+        return render_template('tests.html', outputArea=session.get("output"), num_choices=session["choices_left"])
+
+def from_middle():
+    if 'FMSubmissions' not in session:
+        session["FMSubmissions"] = []
+        session["FMCount"] = 0
+    
+    fm_user_input = request.form.get("textUserInput").split()
+    # print(FM_user_input)
+    if fm_user_input:
+        session["computer_output"] = fm_user_input[0]
+        session["session_user_input"] = fm_user_input[1]
+        session["FMCount"] += 1
+        session.modified = True
+        
+        classify_input()
+        filter_list()
+        
+    if session["FMCount"] >= int(session["FMWordTargetInt"]):
+        session.pop("FMWordTargetInt")
+        print("Reached Target Int, now popping")
 
 def classify_input():
     user_input = session.get("session_user_input")
