@@ -91,7 +91,7 @@ def next_word():
         from_middle()
         if "FMWordTargetInt" in session:
             remaining_words = int(session["FMWordTargetInt"]) - int(session["FMCount"])
-            return render_template('tests.html', MESSAGES = f"PLease enter {remaining_words} more")
+            return render_template('tests.html', outputArea=session.get("output"), MESSAGES = f"PLease enter {remaining_words} more")
         else:
             the_next_word = next_random_word()
             session["output"].append(the_next_word)
@@ -126,6 +126,9 @@ def from_middle():
         session["FMCount"] += 1
         session.modified = True
         
+        session["output"].append(fm_user_input[0])
+        session["output"].append(fm_user_input[1])
+
         classify_input()
         filter_list()
         
@@ -154,6 +157,7 @@ def classify_input():
                 session["not_require"].append(computer_output[i])
                 
 def filter_list():
+    session["new_list"] = []
     for word in session["word_list"]:
         
         if len(word) == len(session.get("session_user_input")):
