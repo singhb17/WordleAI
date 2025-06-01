@@ -6,6 +6,12 @@
     <title>Layout from Sketch</title>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Focus on text-input when page loads
+            const textInput = document.getElementById('text-input');
+            if (textInput) {
+                textInput.focus();
+            }
+
             const fromScratchRadio = document.getElementById('fromScratch');
             const fromMiddleRadio = document.getElementById('fromMiddle');
             const middleInput = document.getElementById('middleNumInputs');
@@ -212,11 +218,11 @@
         <div class="left-section">
             <div class="main-content">
                 <h3>Number of choices left: {{ num_choices }}<br><br></h3>
-<!--                <h4>{{outputArea}}</h4>-->
+                ************************* <br>
                 {% for word in outputArea: %}
                     {{word}}<br>
                     {% if outputArea.index(word) % 2 != 0: %}
-                       ----------------------- <br>
+                       ************************* <br>
                     {% endif %}
                 {% endfor %}
             </div>

@@ -78,9 +78,12 @@ def another():
         session["output"][0] = random_word
         session["computer_output"] = random_word
     else:
-        the_next_word = next_random_word()
-        session["output"][-1] = the_next_word
-        session["choices_left"] = len(session["new_list"])
+        if "FMWordTargetInt" not in session:
+            the_next_word = next_random_word()
+            session["output"][-1] = the_next_word
+            session["choices_left"] = len(session["new_list"])
+        else:
+            return render_template("tests.html", MESSAGES="Nothing to choose another word from", num_choices="Can't say!")
     
     return render_template("tests.html", outputArea=session.get("output"), num_choices=session.get("choices_left"))
 
@@ -91,7 +94,7 @@ def next_word():
         from_middle()
         if "FMWordTargetInt" in session:
             remaining_words = int(session["FMWordTargetInt"]) - int(session["FMCount"])
-            return render_template('tests.html', outputArea=session.get("output"), MESSAGES = f"PLease enter {remaining_words} more")
+            return render_template('tests.html', outputArea=session.get("output"), MESSAGES = f"Please enter {remaining_words} more")
         else:
             the_next_word = next_random_word()
             session["output"].append(the_next_word)
