@@ -10,9 +10,6 @@ app.secret_key = "V@#3guru"
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_FILE_DIR"] = r"C:\Temp"
 
-
-# testing if vscode can push to github - test 1
-
 Session(app)
 
 wordListCreated = False
