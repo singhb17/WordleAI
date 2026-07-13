@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layout from Sketch</title>
+    <title>Wordle Solver</title>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Focus on text-input when page loads
@@ -36,7 +36,6 @@
     </script>
 
     <style>
-        /* styles.css */
         * {
             margin: 0;
             padding: 0;
@@ -44,183 +43,358 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f2f3f5;
+            color: #1a1a1b;
             padding: 20px;
         }
 
+        /* ===== Header ===== */
+        .site-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin: 6px auto 26px auto;
+        }
+
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .site-subtitle {
+            font-size: 14px;
+            font-weight: 500;
+            color: #8a8d91;
+        }
+
+        .logo-tiles {
+            display: flex;
+            gap: 4px;
+        }
+
+        .logo-tile {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            border-radius: 5px;
+            text-transform: uppercase;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== Layout ===== */
         .container {
             display: flex;
             gap: 20px;
-            max-width: 80%;
+            max-width: 1000px;
             margin: 0 auto;
-            align-items: stretch;
+            align-items: flex-start;
         }
 
-        /* Left Section */
         .left-section {
-            flex: 2.90; /* Takes up 3 parts of the available space */
+            flex: 2;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 14px;
+            min-width: 0;
         }
 
-        .main-content {
+        .card,
+        .main-content,
+        .input-box,
+        .right-section,
+        .instructions {
             background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            min-height: 400px; /* Placeholder height */
+            border: 1px solid #e2e4e8;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
-        .input-box {
+        /* ===== Board (suggestions) ===== */
+        .main-content {
+            padding: 24px;
+            min-height: 420px;
             display: flex;
             flex-direction: column;
+        }
+
+        .board-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .board-header h3 {
+            font-size: 18px;
+        }
+
+        .stat-pill {
+            background-color: #eef5ed;
+            border: 1px solid #6aaa64;
+            color: #3f6b3a;
+            border-radius: 999px;
+            padding: 4px 14px;
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .board {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .board-empty {
+            margin: auto;
+            color: #8a8d91;
+            font-size: 15px;
+            text-align: center;
+            max-width: 320px;
+            line-height: 1.5;
+        }
+
+        .tile-row {
+            display: flex;
             gap: 5px;
         }
 
+        .tile {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .tile-green { background-color: #6aaa64; }
+        .tile-yellow { background-color: #c9b458; }
+        .tile-gray { background-color: #787c7e; }
+
+        .tile-word {
+            background-color: #fff;
+            border: 2px solid #878a8c;
+            color: #1a1a1b;
+        }
+
+        /* ===== Message banner ===== */
+        .message-banner {
+            background-color: #fff8e1;
+            border: 1px solid #e6ce7a;
+            border-left: 5px solid #c9b458;
+            border-radius: 8px;
+            padding: 14px 16px;
+            color: #6b5b1e;
+            font-weight: 600;
+        }
+
+        /* ===== Input card ===== */
+        .input-box {
+            padding: 18px 20px 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
         .input-box label {
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 15px;
         }
 
         .input-box input {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 13px 14px;
+            font-size: 18px;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            letter-spacing: 3px;
+            border: 2px solid #d3d6da;
+            border-radius: 8px;
             width: 100%;
+            outline: none;
         }
 
-        /* Right Section (Sidebar) */
-        .right-section {
-            flex: 1.10; /* Takes up 1 part of the available space */
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            min-height: 100%;
+        .input-box input:focus {
+            border-color: #6aaa64;
+            box-shadow: 0 0 0 3px rgba(106, 170, 100, 0.25);
         }
 
-        .buttons-container {
+        .actions-row {
             display: flex;
-            flex-direction: row;
             gap: 10px;
+            margin-top: 8px;
+        }
+
+        .actions-row form {
+            display: flex;
+        }
+
+        .actions-row form:first-child {
+            flex: 2;
+        }
+
+        .actions-row form:last-child {
+            flex: 1;
+        }
+
+        .btn-primary {
             width: 100%;
-            margin-top: auto;
-        }
-
-        .buttons-container button {
-            padding: 10px;
+            padding: 12px;
             font-size: 16px;
-            background-color: #6ca965;
+            font-weight: 700;
+            background-color: #6aaa64;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            /* margin-bottom: 10px; */
-            flex:1;
         }
 
-        .buttons-container button:hover {
-            background-color: #52804d;
+        .btn-primary:hover {
+            background-color: #5c9757;
         }
 
-        .right-section fieldset {
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
+        .btn-secondary {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            background-color: #fff;
+            color: #5a5a5c;
+            border: 2px solid #d3d6da;
+            border-radius: 8px;
+            cursor: pointer;
         }
 
-        .pickDBPanel form {
-            display: flex;
-            gap: 10px; /* Space between input and button */
-            width: 100%; /* Ensure form takes full width of fieldset */
+        .btn-secondary:hover {
+            border-color: #8a8d91;
+            color: #1a1a1b;
+        }
+
+        /* ===== Sidebar: New Game setup ===== */
+        .right-section {
+            flex: 1;
+            padding: 20px;
+            position: sticky;
+            top: 20px;
+        }
+
+        .panel-title {
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #787c7e;
+            margin-bottom: 14px;
+        }
+
+        .setup-field {
+            margin-bottom: 16px;
+        }
+
+        .setup-field .field-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #3a3a3c;
+            margin-bottom: 6px;
         }
 
         .DBInput {
-            flex: 1;
-            padding: 10px;
+            padding: 10px 12px;
             font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 2px solid #d3d6da;
+            border-radius: 8px;
             width: 100%;
+            outline: none;
         }
 
-        .submitBtn {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color: black;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 40%; /* Makes it a bit longer */
-            margin: 20px auto 10px auto; /* Top spacing + center horizontally */
-            display: block; /* Required to center using margin auto */
-        }
-
-        .submitBtn:hover {
-            background-color: rgb(71, 71, 71);
+        .DBInput:focus {
+            border-color: #6aaa64;
+            box-shadow: 0 0 0 3px rgba(106, 170, 100, 0.25);
         }
 
         .pickTypePanel {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 8px;
         }
 
-        .pickTypePanel div {
+        .mode-option {
             display: flex;
             align-items: center;
-            gap: 10px; /* Space between radio and label */
-        }
-
-        .rightSectionForms {
-            border: 1px solid black /* !important /*; /* Strong black border */
-        }
-
-        .rightSectionForms fieldset {
-            margin-left: 10px;
-            margin-right: 10px;
-            margin-bottom: 20px;
-        }
-
-        .actions{
-            display: flex;
-            flex-direction: row;
             gap: 10px;
+            padding: 10px 12px;
+            border: 2px solid #d3d6da;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            color: #3a3a3c;
+        }
+
+        .mode-option:hover {
+            border-color: #8a8d91;
+        }
+
+        .mode-option:has(input:checked) {
+            border-color: #6aaa64;
+            background-color: #f0f7ef;
+        }
+
+        .mode-option input {
+            accent-color: #6aaa64;
+            width: 16px;
+            height: 16px;
+        }
+
+        #middleNumInputs {
+            margin-top: 8px;
+        }
+
+        .submitBtn {
             width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            background-color: #1a1a1b;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 4px;
         }
 
-        .actions form {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            width: 100%;
+        .submitBtn:hover {
+            background-color: #3a3a3c;
         }
 
-        .message-banner {
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            min-height: 60px; /* Placeholder height */
-        }
-
-        /* Instructions panel (below main container) */
+        /* ===== Instructions panel (below main container) ===== */
         .instructions {
-            max-width: 80%;
+            max-width: 1000px;
             margin: 20px auto 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 24px;
         }
 
         .instructions h3 {
+            font-size: 18px;
             margin-bottom: 15px;
         }
 
@@ -240,9 +414,9 @@
             display: flex;
             align-items: flex-start;
             gap: 10px;
-            background-color: #f7f7f7;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            background-color: #f7f7f8;
+            border: 1px solid #e2e4e8;
+            border-radius: 8px;
             padding: 12px;
         }
 
@@ -251,33 +425,12 @@
             height: 26px;
             flex: 0 0 26px;
             border-radius: 50%;
-            background-color: #6ca965;
+            background-color: #6aaa64;
             color: white;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .tile {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            font-size: 20px;
-            font-weight: bold;
-            color: white;
-            border-radius: 4px;
-        }
-
-        .tile-green { background-color: #6aaa64; }
-        .tile-yellow { background-color: #c9b458; }
-        .tile-gray { background-color: #787c7e; }
-
-        .tile-row {
-            display: flex;
-            gap: 5px;
         }
 
         .instr-legend {
@@ -292,10 +445,15 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background-color: #f7f7f7;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            background-color: #f7f7f8;
+            border: 1px solid #e2e4e8;
+            border-radius: 8px;
             padding: 10px;
+        }
+
+        /* legend tiles show the literal case you type, so no auto-uppercase */
+        .instr-legend-item .tile {
+            text-transform: none;
         }
 
         .instr-example {
@@ -322,105 +480,176 @@
             font-size: 22px;
             font-weight: bold;
             letter-spacing: 4px;
-            background-color: #f7f7f7;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            background-color: #f7f7f8;
+            border: 1px solid #d3d6da;
+            border-radius: 8px;
             padding: 8px 14px;
         }
 
         .instr-note {
             margin-top: 20px;
-            background-color: #f7f7f7;
-            border-left: 4px solid #6ca965;
+            background-color: #f7f7f8;
+            border-left: 4px solid #6aaa64;
             border-radius: 3px;
             padding: 10px 12px;
         }
 
         .instr-code {
             font-family: 'Courier New', monospace;
-            background-color: #eee;
+            background-color: #ececee;
             padding: 2px 6px;
             border-radius: 3px;
+        }
+
+        /* ===== Mobile layout (phones and small tablets) ===== */
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+
+            .site-header {
+                margin-bottom: 18px;
+            }
+
+            .logo-tile {
+                width: 30px;
+                height: 30px;
+                font-size: 17px;
+            }
+
+            .logo-text {
+                font-size: 23px;
+            }
+
+            .container {
+                flex-direction: column;
+                max-width: 100%;
+                align-items: stretch;
+            }
+
+            /* Show the New Game setup first on phones,
+               since that's where a game starts */
+            .right-section {
+                order: -1;
+                position: static;
+            }
+
+            .main-content {
+                min-height: 250px;
+            }
+
+            .instructions {
+                max-width: 100%;
+            }
+
+            /* Stack the example vertically and point the arrow downward */
+            .instr-example {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .instr-arrow {
+                transform: rotate(90deg);
+                margin-left: 88px; /* roughly centered under the 5-tile row */
+            }
         }
     </style>
 
 </head>
 <body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="logo-row">
+            <div class="logo-tiles">
+                <span class="logo-tile tile-green">W</span>
+                <span class="logo-tile tile-gray">O</span>
+                <span class="logo-tile tile-yellow">R</span>
+                <span class="logo-tile tile-green">D</span>
+                <span class="logo-tile tile-gray">L</span>
+                <span class="logo-tile tile-yellow">E</span>
+            </div>
+            <span class="logo-text">Solver</span>
+        </div>
+        <p class="site-subtitle">Developed by Binwant Singh</p>
+    </header>
+
     <div class="container">
-        <!-- Left Section -->
+        <!-- Left Section: play area -->
         <div class="left-section">
             <div class="main-content">
-                <h3>Number of choices left: {{ num_choices }}<br><br></h3>
-                ************************* <br>
-                {% for word in outputArea: %}
-                    {{word}}<br>
-                    {% if outputArea.index(word) % 2 != 0: %}
-                       ************************* <br>
-                    {% endif %}
-                {% endfor %}
+                <div class="board-header">
+                    <h3>Suggestions</h3>
+                    <span class="stat-pill">Choices left: {% if num_choices is defined and num_choices is not none %}{{ num_choices }}{% else %}&mdash;{% endif %}</span>
+                </div>
+                <div class="board">
+                    {# outputArea alternates suggestion, feedback, suggestion, ... -
+                       each pair becomes ONE row: the word's letters colored by its feedback #}
+                    {% set items = outputArea or [] %}
+                    {% for i in range(0, items|length, 2) %}
+                        {% set word = items[i] %}
+                        {% set fb = items[i + 1] if i + 1 < items|length else None %}
+                        <div class="tile-row">
+                            {% for ch in word %}{% set j = loop.index0 %}{% if fb and j < fb|length %}{% if fb[j] == '-' %}<span class="tile tile-gray">{{ ch }}</span>{% elif fb[j].isupper() %}<span class="tile tile-green">{{ ch }}</span>{% else %}<span class="tile tile-yellow">{{ ch }}</span>{% endif %}{% else %}<span class="tile tile-word">{{ ch }}</span>{% endif %}{% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if not outputArea %}
+                <p class="board-empty">Pick a word length under <strong>New Game</strong> and hit <strong>Start</strong> - suggestions will show up here as tiles.</p>
+                {% endif %}
             </div>
-            <div class="message-banner">
-                <h4>{{MESSAGES}}</h4>
-            </div>
+
+            {% if MESSAGES %}
+            <div class="message-banner">{{ MESSAGES }}</div>
+            {% endif %}
+
             <!-- Input Box Below -->
             <div class="input-box">
-                <label for="text-input">Textbox, Input Box:</label>
+                <label for="text-input">Enter your feedback</label>
                 <form method="POST" action="{{ url_for('next_word') }}">
-                    <input type="text" id="text-input" name="textUserInput" placeholder="Enter text here..." required>
+                    <input type="text" id="text-input" name="textUserInput" required>
                     <button type="submit" style="display: none;"></button>
                 </form>
+                <div class="actions-row">
+                    <form method="POST" action="{{url_for('another')}}">
+                        <button id="another" class="btn-primary" type="submit" name="action" value="another">&#8635; Another word</button>
+                    </form>
+                    <form method="POST" action="{{url_for('home')}}">
+                        <button id="reset" class="btn-secondary" type="submit" name="action" value="reset">Reset</button>
+                    </form>
+                </div>
             </div>
         </div>
 
-        <!-- Right Section (Sidebar) -->
+        <!-- Right Section (Sidebar): one-time game setup -->
         <div class="right-section">
-            <fieldset class="rightSectionForms">
+            <h3 class="panel-title">New Game</h3>
 
-                <form method="POST" action="{{url_for('create_wordlist')}}">
+            <form method="POST" action="{{url_for('create_wordlist')}}">
 
-                    <fieldset class="pickDBPanel">
-                        <legend>Pick Database</legend>
-                        <label>
-                            <input id="DBInput" class="DBInput" type="number" name="word_len" value="{{ dbInputVal }}">
-                        </label>
-                    </fieldset>
+                <div class="setup-field pickDBPanel">
+                    <label>
+                        <span class="field-label">Word length</span>
+                        <input id="DBInput" class="DBInput" type="number" name="word_len" value="{{ dbInputVal }}">
+                    </label>
+                </div>
 
-                    <fieldset class="pickTypePanel">
-                        <legend>Pick Mode</legend>
-                        <div id="radLabelScratch">
-                            <label>
-                                <input id="fromScratch" type="radio" name="radModeType" value="fromScratch">
-                            </label>
-                            <label>From Scratch</label>
-                        </div>
+                <div class="setup-field pickTypePanel">
+                    <span class="field-label">Mode</span>
+                    <label class="mode-option">
+                        <input id="fromScratch" type="radio" name="radModeType" value="fromScratch">
+                        From Scratch
+                    </label>
+                    <label class="mode-option">
+                        <input id="fromMiddle" type="radio" name="radModeType" value="fromMiddle">
+                        From Middle
+                    </label>
+                    <input id="middleNumInputs" class="DBInput" type="number" name="middle_input_num" placeholder="Guesses made so far?" style="display:none;">
+                </div>
 
-                        <div id="radLabelMiddle">
-                            <label for="fromMiddle"><input id="fromMiddle" type="radio" name="radModeType" value="fromMiddle"></label>
-                            <label>From Middle</label>
-                        </div>
-                            <label><input id="middleNumInputs" type="number" name="middle_input_num" style="display:none;"></label>
+                <input class="submitBtn" type="submit" name="saveDB" value="Start">
 
-                    </fieldset>
-
-                    <input class="submitBtn" type="submit" name="saveDB" value="Save">
-
-                </form>
-
-            </fieldset>
-
-            <div class="buttons-container">
-                <fieldset class="actions">
-                    <legend>Actions</legend>
-
-                        <form method="POST" action="{{url_for('another')}}">
-                            <button id="another" type="submit" name="action" value="another">Another</button>
-                        </form>
-                        <form method="POST" action="{{url_for('home')}}">
-                            <button id="reset" type="submit" name="action" value="reset">Reset</button>
-                        </form>
-                </fieldset>
-            </div>
-
+            </form>
         </div>
     </div>
 
@@ -431,11 +660,11 @@
         <div class="instr-steps">
             <div class="instr-step">
                 <div class="instr-step-num">1</div>
-                <p>Enter your word length under <strong>Pick Database</strong>, choose a mode, and hit <strong>Save</strong>.</p>
+                <p>Enter your word length under <strong>New Game</strong>, choose a mode, and hit <strong>Start</strong>.</p>
             </div>
             <div class="instr-step">
                 <div class="instr-step-num">2</div>
-                <p>The app suggests a word &mdash; play it in your Wordle game.</p>
+                <p>The app suggests a word - play it in your Wordle game.</p>
             </div>
             <div class="instr-step">
                 <div class="instr-step-num">3</div>
@@ -478,7 +707,7 @@
             </div>
         </div>
 
-        <p class="instr-note"><strong>From Middle mode:</strong> already made some guesses in your game? Enter how many, then for each one type the guess and its colors separated by a space &mdash; e.g. <span class="instr-code">crane -Ra-E</span> &mdash; and the app catches up.</p>
+        <p class="instr-note"><strong>From Middle mode:</strong> already made some guesses in your game? Enter how many, then for each one type the guess and its colors separated by a space - e.g. <span class="instr-code">crane -Ra-E</span> - and the app catches up.</p>
     </div>
 
 </body>
