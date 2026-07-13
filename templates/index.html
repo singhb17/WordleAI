@@ -209,6 +209,139 @@
             border-radius: 5px;
             min-height: 60px; /* Placeholder height */
         }
+
+        /* Instructions panel (below main container) */
+        .instructions {
+            max-width: 80%;
+            margin: 20px auto 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .instructions h3 {
+            margin-bottom: 15px;
+        }
+
+        .instructions h4 {
+            margin: 20px 0 10px 0;
+        }
+
+        .instr-steps {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .instr-step {
+            flex: 1;
+            min-width: 180px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 12px;
+        }
+
+        .instr-step-num {
+            width: 26px;
+            height: 26px;
+            flex: 0 0 26px;
+            border-radius: 50%;
+            background-color: #6ca965;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tile {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .tile-green { background-color: #6aaa64; }
+        .tile-yellow { background-color: #c9b458; }
+        .tile-gray { background-color: #787c7e; }
+
+        .tile-row {
+            display: flex;
+            gap: 5px;
+        }
+
+        .instr-legend {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .instr-legend-item {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .instr-example {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .instr-example-caption {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .instr-arrow {
+            font-size: 28px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .instr-typed {
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 8px 14px;
+        }
+
+        .instr-note {
+            margin-top: 20px;
+            background-color: #f7f7f7;
+            border-left: 4px solid #6ca965;
+            border-radius: 3px;
+            padding: 10px 12px;
+        }
+
+        .instr-code {
+            font-family: 'Courier New', monospace;
+            background-color: #eee;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
     </style>
 
 </head>
@@ -289,6 +422,63 @@
             </div>
 
         </div>
+    </div>
+
+    <!-- Instructions (visual guide) -->
+    <div class="instructions">
+        <h3>How to use</h3>
+
+        <div class="instr-steps">
+            <div class="instr-step">
+                <div class="instr-step-num">1</div>
+                <p>Enter your word length under <strong>Pick Database</strong>, choose a mode, and hit <strong>Save</strong>.</p>
+            </div>
+            <div class="instr-step">
+                <div class="instr-step-num">2</div>
+                <p>The app suggests a word &mdash; play it in your Wordle game.</p>
+            </div>
+            <div class="instr-step">
+                <div class="instr-step-num">3</div>
+                <p>Type the colors Wordle showed you into the text box (see below), press <strong>Enter</strong>, and repeat!</p>
+            </div>
+        </div>
+
+        <h4>How to enter the colors</h4>
+        <div class="instr-legend">
+            <div class="instr-legend-item">
+                <span class="tile tile-green">R</span>
+                <p><strong>Green</strong> (right spot) &rarr; type the letter <strong>UPPERCASE</strong></p>
+            </div>
+            <div class="instr-legend-item">
+                <span class="tile tile-yellow">a</span>
+                <p><strong>Yellow</strong> (wrong spot) &rarr; type the letter <strong>lowercase</strong></p>
+            </div>
+            <div class="instr-legend-item">
+                <span class="tile tile-gray">-</span>
+                <p><strong>Gray</strong> (not in word) &rarr; type a dash <strong>-</strong></p>
+            </div>
+        </div>
+
+        <h4>Example</h4>
+        <div class="instr-example">
+            <div>
+                <p class="instr-example-caption">The app suggests CRANE, Wordle shows:</p>
+                <div class="tile-row">
+                    <span class="tile tile-gray">C</span>
+                    <span class="tile tile-green">R</span>
+                    <span class="tile tile-yellow">A</span>
+                    <span class="tile tile-gray">N</span>
+                    <span class="tile tile-green">E</span>
+                </div>
+            </div>
+            <div class="instr-arrow">&rarr;</div>
+            <div>
+                <p class="instr-example-caption">So you type:</p>
+                <div class="instr-typed">-Ra-E</div>
+            </div>
+        </div>
+
+        <p class="instr-note"><strong>From Middle mode:</strong> already made some guesses in your game? Enter how many, then for each one type the guess and its colors separated by a space &mdash; e.g. <span class="instr-code">crane -Ra-E</span> &mdash; and the app catches up.</p>
     </div>
 
 </body>
