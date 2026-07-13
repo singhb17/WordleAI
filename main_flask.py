@@ -1,14 +1,13 @@
 from flask import Flask, render_template, request, session
 from flask_session import Session
 
-import json
+import os
 import requests
 import random
 
 app = Flask(__name__)
-app.secret_key = "V@#3guru"
+app.secret_key = os.environ.get("SECRET_KEY", "dev-only-secret-key")
 app.config["SESSION_TYPE"] = "filesystem"
-app.config["SESSION_FILE_DIR"] = r"C:\Temp"
 
 Session(app)
 
