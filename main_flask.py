@@ -22,7 +22,7 @@ def home():
     session["not_require"] = []
     session["somewhere"] = []
     
-    return render_template("tests.html")
+    return render_template("index.html")
 
 @app.route("/createList", methods=["POST", "GET"])
 def create_wordlist():
@@ -31,7 +31,7 @@ def create_wordlist():
     word_len = request.form.get("word_len")
     selected_mode = request.form.get("radModeType")
     if word_len == "" or not selected_mode:
-        return render_template("tests.html", MESSAGES="Please complete the DB form!", dbInputVal=word_len)
+        return render_template("index.html", MESSAGES="Please complete the DB form!", dbInputVal=word_len)
     else: pass
     
     session["word_len"] = word_len
@@ -60,15 +60,15 @@ def create_wordlist():
         session["output"].append(random_word)
     elif selected_mode == "fromMiddle":
         session["FMWordTargetInt"] = request.form.get("middle_input_num")
-        return render_template("tests.html", MESSAGES=f"From Middle Selected, please enter {session["FMWordTargetInt"]} times", dbInputVal=word_len)
+        return render_template("index.html", MESSAGES=f"From Middle Selected, please enter {session["FMWordTargetInt"]} times", dbInputVal=word_len)
     
-    return render_template("tests.html", outputArea=session.get("output"), dbInputVal=word_len)
+    return render_template("index.html", outputArea=session.get("output"), dbInputVal=word_len)
     
 @app.route("/another", methods=["GET", "POST"])
 def another():
     global wordListCreated
     if wordListCreated is False:
-        return render_template("tests.html", MESSAGES="Please select a Database", num_choices=session.get("choices_left"))
+        return render_template("index.html", MESSAGES="Please select a Database", num_choices=session.get("choices_left"))
     else:
         pass
     
@@ -82,9 +82,9 @@ def another():
             session["output"][-1] = the_next_word
             session["choices_left"] = len(session["new_list"])
         else:
-            return render_template("tests.html", MESSAGES="Nothing to choose another word from", num_choices="Can't say!")
+            return render_template("index.html", MESSAGES="Nothing to choose another word from", num_choices="Can't say!")
     
-    return render_template("tests.html", outputArea=session.get("output"), num_choices=session.get("choices_left"))
+    return render_template("index.html", outputArea=session.get("output"), num_choices=session.get("choices_left"))
 
 @app.route("/nextWord", methods=["POST", "GET"])
 def next_word():
@@ -93,12 +93,12 @@ def next_word():
         from_middle()
         if "FMWordTargetInt" in session:
             remaining_words = int(session["FMWordTargetInt"]) - int(session["FMCount"])
-            return render_template('tests.html', outputArea=session.get("output"), MESSAGES = f"Please enter {remaining_words} more")
+            return render_template('index.html', outputArea=session.get("output"), MESSAGES = f"Please enter {remaining_words} more")
         else:
             the_next_word = next_random_word()
             session["output"].append(the_next_word)
             session["choices_left"] = len(session["new_list"])
-            return render_template('tests.html', outputArea=session.get("output"), num_choices=session["choices_left"])
+            return render_template('index.html', outputArea=session.get("output"), num_choices=session["choices_left"])
     else:
         user_input = request.form.get("textUserInput")
         session["output"].append(user_input)
@@ -113,7 +113,7 @@ def next_word():
         session["output"].append(the_next_word)
         session["choices_left"] = len(session["new_list"])
     
-        return render_template('tests.html', outputArea=session.get("output"), num_choices=session["choices_left"])
+        return render_template('index.html', outputArea=session.get("output"), num_choices=session["choices_left"])
 
 def from_middle():
     if 'FMSubmissions' not in session:
