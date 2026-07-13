@@ -1,0 +1,518 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f2f3f5;
+    color: #1a1a1b;
+    padding: 20px;
+}
+
+/* ===== Header ===== */
+.site-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 6px auto 26px auto;
+}
+
+.logo-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.site-subtitle {
+    font-size: 14px;
+    font-weight: 500;
+    color: #8a8d91;
+}
+
+.logo-tiles {
+    display: flex;
+    gap: 4px;
+}
+
+.logo-tile {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+/* ===== Layout ===== */
+.container {
+    display: flex;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.left-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+}
+
+.card,
+.main-content,
+.input-box,
+.right-section,
+.instructions {
+    background-color: #fff;
+    border: 1px solid #e2e4e8;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== Board (suggestions) ===== */
+.main-content {
+    padding: 24px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+}
+
+.board-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.board-header h3 {
+    font-size: 18px;
+}
+
+.stat-pill {
+    background-color: #eef5ed;
+    border: 1px solid #6aaa64;
+    color: #3f6b3a;
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.board {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.board-empty {
+    margin: auto;
+    color: #8a8d91;
+    font-size: 15px;
+    text-align: center;
+    max-width: 320px;
+    line-height: 1.5;
+}
+
+.tile-row {
+    display: flex;
+    gap: 5px;
+}
+
+.tile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.tile-green { background-color: #6aaa64; }
+.tile-yellow { background-color: #c9b458; }
+.tile-gray { background-color: #787c7e; }
+
+.tile-word {
+    background-color: #fff;
+    border: 2px solid #878a8c;
+    color: #1a1a1b;
+}
+
+/* ===== Message banner ===== */
+.message-banner {
+    background-color: #fff8e1;
+    border: 1px solid #e6ce7a;
+    border-left: 5px solid #c9b458;
+    border-radius: 8px;
+    padding: 14px 16px;
+    color: #6b5b1e;
+    font-weight: 600;
+}
+
+/* ===== Input card ===== */
+.input-box {
+    padding: 18px 20px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-box label {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.input-box input {
+    padding: 13px 14px;
+    font-size: 18px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    letter-spacing: 3px;
+    border: 2px solid #d3d6da;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+.input-box input:focus {
+    border-color: #6aaa64;
+    box-shadow: 0 0 0 3px rgba(106, 170, 100, 0.25);
+}
+
+.actions-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.actions-row form {
+    display: flex;
+}
+
+.actions-row form:first-child {
+    flex: 2;
+}
+
+.actions-row form:last-child {
+    flex: 1;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #6aaa64;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #5c9757;
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #fff;
+    color: #5a5a5c;
+    border: 2px solid #d3d6da;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    border-color: #8a8d91;
+    color: #1a1a1b;
+}
+
+/* ===== Sidebar: New Game setup ===== */
+.right-section {
+    flex: 1;
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+}
+
+.panel-title {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #787c7e;
+    margin-bottom: 14px;
+}
+
+.setup-field {
+    margin-bottom: 16px;
+}
+
+.setup-field .field-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3a3a3c;
+    margin-bottom: 6px;
+}
+
+.DBInput {
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 2px solid #d3d6da;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+.DBInput:focus {
+    border-color: #6aaa64;
+    box-shadow: 0 0 0 3px rgba(106, 170, 100, 0.25);
+}
+
+.pickTypePanel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mode-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 2px solid #d3d6da;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: #3a3a3c;
+}
+
+.mode-option:hover {
+    border-color: #8a8d91;
+}
+
+.mode-option:has(input:checked) {
+    border-color: #6aaa64;
+    background-color: #f0f7ef;
+}
+
+.mode-option input {
+    accent-color: #6aaa64;
+    width: 16px;
+    height: 16px;
+}
+
+#middleNumInputs {
+    margin-top: 8px;
+}
+
+.submitBtn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    background-color: #1a1a1b;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.submitBtn:hover {
+    background-color: #3a3a3c;
+}
+
+/* ===== Instructions panel (below main container) ===== */
+.instructions {
+    max-width: 1000px;
+    margin: 20px auto 0 auto;
+    padding: 24px;
+}
+
+.instructions h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.instructions h4 {
+    margin: 20px 0 10px 0;
+}
+
+.instr-steps {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.instr-step {
+    flex: 1;
+    min-width: 180px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: #f7f7f8;
+    border: 1px solid #e2e4e8;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.instr-step-num {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+    border-radius: 50%;
+    background-color: #6aaa64;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instr-legend {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.instr-legend-item {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f7f7f8;
+    border: 1px solid #e2e4e8;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* legend tiles show the literal case you type, so no auto-uppercase */
+.instr-legend-item .tile {
+    text-transform: none;
+}
+
+.instr-example {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.instr-example-caption {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.instr-arrow {
+    font-size: 28px;
+    font-weight: bold;
+    color: #555;
+}
+
+.instr-typed {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    background-color: #f7f7f8;
+    border: 1px solid #d3d6da;
+    border-radius: 8px;
+    padding: 8px 14px;
+}
+
+.instr-note {
+    margin-top: 20px;
+    background-color: #f7f7f8;
+    border-left: 4px solid #6aaa64;
+    border-radius: 3px;
+    padding: 10px 12px;
+}
+
+.instr-code {
+    font-family: 'Courier New', monospace;
+    background-color: #ececee;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+/* ===== Mobile layout (phones and small tablets) ===== */
+@media (max-width: 768px) {
+    body {
+        padding: 12px;
+    }
+
+    .site-header {
+        margin-bottom: 18px;
+    }
+
+    .logo-tile {
+        width: 30px;
+        height: 30px;
+        font-size: 17px;
+    }
+
+    .logo-text {
+        font-size: 23px;
+    }
+
+    .container {
+        flex-direction: column;
+        max-width: 100%;
+        align-items: stretch;
+    }
+
+    /* Show the New Game setup first on phones,
+       since that's where a game starts */
+    .right-section {
+        order: -1;
+        position: static;
+    }
+
+    .main-content {
+        min-height: 250px;
+    }
+
+    .instructions {
+        max-width: 100%;
+    }
+
+    /* Stack the example vertically and point the arrow downward */
+    .instr-example {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .instr-arrow {
+        transform: rotate(90deg);
+        margin-left: 88px; /* roughly centered under the 5-tile row */
+    }
+}
