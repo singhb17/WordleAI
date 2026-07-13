@@ -20,8 +20,8 @@ A standalone terminal version is also included (`WordleAI-Terminal.py`).
 ## Setup
 
 ```bash
-git clone https://github.com/<your-username>/<this-repo>.git
-cd <this-repo>
+git clone https://github.com/singhb17/WordleAI.git
+cd WordleAI
 python -m venv venv
 venv\Scripts\activate        # Windows
 # source venv/bin/activate   # macOS/Linux
