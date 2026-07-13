@@ -606,8 +606,8 @@
             <!-- Input Box Below -->
             <div class="input-box">
                 <label for="text-input">Enter your feedback</label>
-                <form method="POST" action="{{ url_for('next_word') }}">
-                    <input type="text" id="text-input" name="textUserInput" required>
+                <form method="POST" action="{{ url_for('next_word') }}" autocomplete="off">
+                    <input type="text" id="text-input" name="textUserInput" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" required>
                     <button type="submit" style="display: none;"></button>
                 </form>
                 <div class="actions-row">
